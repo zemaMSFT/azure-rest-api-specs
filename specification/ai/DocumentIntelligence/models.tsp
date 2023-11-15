@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace DocumentIntelligence;
 
@@ -1096,7 +1094,6 @@ modelId.
 """)
 model CopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
-  @extension("x-ms-azure-resource", true)
   targetResourceId: string;
 
   @doc("""
