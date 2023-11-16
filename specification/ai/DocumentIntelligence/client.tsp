@@ -30,14 +30,14 @@ interface DocumentAnalysisClient {
   service: DocumentIntelligence,
 })
 interface DocumentModelAdministrationClient {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  buildDocumentModel is DocumentModels.buildModel;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  composeModel is DocumentModels.composeModel;
+  //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  //buildDocumentModel is DocumentModels.buildModel;
+  //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  //composeModel is DocumentModels.composeModel;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   authorizeModelCopy is DocumentModels.authorizeModelCopy;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  copyModelTo is DocumentModels.copyModelTo;
+  //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  //copyModelTo is DocumentModels.copyModelTo;
   getModel is DocumentModels.getModel;
   listModels is DocumentModels.listModels;
   deleteModel is DocumentModels.deleteModel;
@@ -91,3 +91,7 @@ interface DocumentModelAdministrationClient {
 @@usage(DocumentField, Usage.output, "csharp");
 @@usage(CurrencyValue, Usage.output, "csharp");
 @@usage(AddressValue, Usage.output, "csharp");
+@@usage(BuildDocumentModelRequest, Usage.input, "csharp");
+@@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
+@@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
+@@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
