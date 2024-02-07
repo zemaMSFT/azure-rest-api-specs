@@ -1,0 +1,20 @@
+{
+  "name": "azure-quantum-data-plane",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/rest": "latest",
+    "@typespec/json-schema": "latest"
+  },
+  "private": true,
+  "devDependencies": {
+    "@azure-tools/typespec-autorest": "latest",
+    "@azure-tools/typespec-client-generator-core": "latest",
+    "@azure-tools/typespec-python": "latest",
+    "@azure-tools/typespec-apiview": "latest"
+  }
+}
