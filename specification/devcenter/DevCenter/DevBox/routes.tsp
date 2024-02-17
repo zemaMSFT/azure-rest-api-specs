@@ -83,7 +83,7 @@ interface DevBoxesOperations {
 
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  start is StandardResourceOperations.LongRunningResourceAction<DevBox, RequestActionParameter, ResponseAction>;
+  start is Azure.Core.LongRunningResourceAction<DevBox, RequestActionParameter, ResponseAction>;
 
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
