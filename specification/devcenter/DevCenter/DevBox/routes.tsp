@@ -45,39 +45,7 @@ interface DevBoxesOperations {
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @put
-  createDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute the operation.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
-      @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
-      @body
-      devBox: DevBox;
-    },
-    DevBox | {
-      @statusCode statusCode: 201;
-
-      @header("Location")
-      location: ResourceLocation<DevBox>;
-
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-
-      @body body?: DevBox;
-    }
-  >;
+  createDevBox is StandardResourceOperations.LongRunningResourceCreateOrUpdate<DevBox>;
 
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
