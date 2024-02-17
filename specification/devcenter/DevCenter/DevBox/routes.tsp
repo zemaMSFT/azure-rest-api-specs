@@ -50,6 +50,7 @@ interface DevBoxesOperations {
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can't use LongRunningResourceDelete because response is 202 or error, but we also accept response 204"
   deleteDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
@@ -82,30 +83,7 @@ interface DevBoxesOperations {
 
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
-  @post
-  startDevBox is Foundations.LongRunningOperation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
-  >;
+  start is StandardResourceOperations.LongRunningResourceAction<DevBox, RequestActionParameter, ResponseAction>;
 
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
