@@ -43,40 +43,10 @@ interface EnvironmentsOperations {
   @doc("Gets an environment")
   getEnvironment is StandardResourceOperations.ResourceRead<Environment>;
 
+
   @doc("Creates or updates an environment.")
-  @finalOperation(EnvironmentsOperations.getEnvironment)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
-  @put
-  createOrUpdateEnvironment is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @path
-      environmentName: string;
-
-      @doc("Represents an environment.")
-      @body
-      body: Environment;
-    },
-    {
-      @statusCode
-      statusCode: 201;
-
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-
-      @body body: Environment;
-    }
-  >;
+  createOrUpdateEnvironment is StandardResourceOperations.LongRunningResourceCreateOrReplace<Environment>;
 
   // FIXME
   @doc("Deletes an environment and all its associated resources")
