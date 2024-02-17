@@ -36,9 +36,10 @@ interface DevBoxesClientOperations {
   listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenterOperations.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
   getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
-  @convenientAPI(false)
+  @convenientAPI(false) 
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
   deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
+  @projectedName("startDevBox", "client")
   start is DevCenterService.DevBoxesOperations.startDevBox;
   stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
   restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
