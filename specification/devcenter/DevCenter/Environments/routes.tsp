@@ -48,41 +48,41 @@ interface EnvironmentsOperations {
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   createOrUpdateEnvironment is StandardResourceOperations.LongRunningResourceCreateOrReplace<Environment>;
 
-  // FIXME
   @doc("Deletes an environment and all its associated resources")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
-  deleteEnvironment(
-    ...Foundations.ApiVersionParameter,
-
-    @doc("The DevCenter Project upon which to execute operations.")
-    @path
-    projectName: string,
-
-    @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-    @path
-    userId: string,
-
-    @doc("The name of the environment.")
-    @path
-    environmentName: string,
-  ): {
-    @statusCode
-    statusCode: 202;
-
-    @body body: OperationStatus;
-
-    @header("Location")
-    location: string;
-
-    @pollingLocation
-    @header("Operation-Location")
-    operationLocation: string;
-  } | {
-    @statusCode
-    statusCode: 204;
-  } | Azure.Core.Foundations.ErrorResponse;
+  deleteEnvironment is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string,
+      
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string,
+      
+      @doc("The name of the environment.")
+      @path
+      environmentName: string,
+    },
+    {
+       @statusCode
+       statusCode: 202;
+   
+       @body body: OperationStatus;
+   
+       @header("Location")
+       location: string;
+   
+       @pollingLocation
+       @header("Operation-Location")
+       operationLocation: string;
+     } | {
+       @statusCode
+       statusCode: 204;
+     } 
+   >;
 
   @doc("Lists all of the catalogs available for a project.")
   listCatalogs is StandardResourceOperations.ResourceList<Catalog>;
