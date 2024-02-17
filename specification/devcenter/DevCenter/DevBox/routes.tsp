@@ -43,9 +43,8 @@ interface DevBoxesOperations {
   getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
 
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  createDevBox is StandardResourceOperations.LongRunningResourceCreateOrUpdate<DevBox>;
+  createDevBox is StandardResourceOperations.LongRunningResourceCreateOrReplace<DevBox>;
 
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
