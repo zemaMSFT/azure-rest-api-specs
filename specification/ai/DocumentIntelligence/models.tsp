@@ -303,7 +303,6 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceError")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;

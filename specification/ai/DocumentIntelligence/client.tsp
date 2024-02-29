@@ -54,6 +54,8 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@projectedName(Error, "csharp", "DocumentIntelligenceError");
+
 @@usage(DocumentAnalysisFeature, Usage.output, "csharp");
 @@usage(LengthUnit, Usage.output, "csharp");
 @@usage(DocumentSelectionMarkState, Usage.output, "csharp");
