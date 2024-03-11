@@ -3058,6 +3058,54 @@
         }
       }
     },
+    "/navigate": {
+      "post": {
+        "tags": [
+          "Discovery"
+        ],
+        "description": "Navigate entities by itemPath.",
+        "operationId": "Discovery_Navigation",
+        "x-ms-examples": {
+          "Discovery_Navigation": {
+            "$ref": "./examples/Discovery_Navigation.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "NavigationRequest",
+            "description": "An object specifying the navigation criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NavigationRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful get the entities.",
+            "schema": {
+              "$ref": "#/definitions/NavigationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/lineage/{guid}": {
       "get": {
         "tags": [
@@ -6866,6 +6914,121 @@
       "title": "SuggestRequest",
       "description": "The query of suggest request."
     },
+    "NavigationRequest": {
+      "type": "object",
+      "properties": {
+        "navigationMode": {
+          "$ref": "#/definitions/NavigationModeCategory"
+        },
+        "itemPath": {
+          "$ref": "#/definitions/itemPathIdentifier"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "includeNextLevelAssetCount": {
+          "type": "boolean",
+          "description": "Whether to return the count of the children."
+        }
+      }
+    },
+    "NavigationModeCategory": {
+      "type": "string",
+      "title": "NavigationModeCategory",
+      "description": "The enum of navigation mode.",
+      "enum": [
+        "assetType",
+        "azureResourceHierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "NavigationModeCategory",
+        "modelAsString": true
+      }
+    },
+    "itemPathIdentifier": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the item."
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "The extended properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NavigationResult": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NavigationResultValue"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Absent if there's no more data."
+        }
+      },
+      "title": "NavigationResult",
+      "description": "The result items of the Navigation Request."
+    },
+    "NavigationResultValue": {
+      "type": "object",
+      "title": "NavigationResultValue",
+      "description": "The value item of the navigate request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the item."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type name of the item. Eg. EntityType."
+        },
+        "leafNode": {
+          "type": "boolean",
+          "description": "Whether the item is a leaf node."
+        },
+        "kind": {
+          "type": "string",
+          "title": "Kind",
+          "description": "The kind of the item. Whether it is entity or category.",
+          "enum": [
+            "entity",
+            "category"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "itemPath": {
+          "$ref": "#/definitions/itemPathIdentifier"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the top level asset. Won't return if request payload 'count' is false."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "LastModifiedTS": {
       "type": "string",
       "title": "lastModifiedTS",
@@ -7303,6 +7466,23 @@
       "required": false,
       "type": "string",
       "default": "ASC",
+      "x-ms-parameter-location": "method"
+    },
+    "maxpagesize": {
+      "name": "maxpagesize",
+      "description": "The page size - by default the value is 100. The maximum is 10000.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "continuationToken": {
+      "name": "continuationToken",
+      "description": "To achieve paginated results, invoke the API with the next continuationToken received from Navigation Result to retrieve subsequent pages.",
+      "in": "query",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "termGuid": {
