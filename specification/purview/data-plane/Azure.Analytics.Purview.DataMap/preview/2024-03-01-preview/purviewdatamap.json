@@ -6932,7 +6932,7 @@
         },
         "includeNextLevelAssetCount": {
           "type": "boolean",
-          "description": "Whether to return the count of the children."
+          "description": "Whether to return the count of the next level asset."
         }
       }
     },
