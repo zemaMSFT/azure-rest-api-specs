@@ -14,7 +14,7 @@
         "properties": {
         }
       },
-      "api-version": "2023-10-01-preview",
+      "api-version": "2024-03-01-preview",
       "maxpagesize": 100,
       "continuationToken": null
     },

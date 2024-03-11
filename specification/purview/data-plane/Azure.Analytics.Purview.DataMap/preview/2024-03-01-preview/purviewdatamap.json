@@ -6995,22 +6995,13 @@
           "type": "string",
           "description": "The type name of the item. Eg. EntityType."
         },
-        "leafNode": {
+        "isLeafNode": {
           "type": "boolean",
           "description": "Whether the item is a leaf node."
         },
-        "kind": {
-          "type": "string",
-          "title": "Kind",
-          "description": "The kind of the item. Whether it is entity or category.",
-          "enum": [
-            "entity",
-            "category"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
+        "isEntity": {
+          "type": "boolean",
+          "description": "Whether the item is Entity. If yes, can get detail of this entity."
         },
         "itemPath": {
           "$ref": "#/definitions/itemPathIdentifier"
