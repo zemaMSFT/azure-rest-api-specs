@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-10'
+```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Azure.Analytics.Purview.DataMap/preview/2023-10-01-preview/purviewdatamap.json
 ```
@@ -51,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09'
 input-file:
   - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
@@ -122,7 +122,7 @@ title: PurviewScanningClient
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-09-01'
+```yaml $(tag) == 'package-2023-09-01'
 input-file:
   - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
 ```
